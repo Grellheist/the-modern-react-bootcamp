@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import Die from './Die';
 
 class RollDice extends Component {
+    static defaultProps = {
+        sides: ["one", "two", "three", "four", "five", "six"]
+    }
     constructor(props) {
         super(props);
         this.state = {die1: "one", die2: "one"};
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick () {
-        const sides = ["one", "two", "three", "four", "five", "six"];
-        this.setState({die1: sides[Math.floor(Math.random() * sides.length)], die2: sides[Math.floor(Math.random() * sides.length)]});
+        this.setState({
+            die1: this.props.sides[Math.floor(Math.random() * this.props.sides.length)],
+            die2: this.props.sides[Math.floor(Math.random() * this.props.sides.length)]
+        });
     }
     render() {
         return (
