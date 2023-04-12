@@ -7,7 +7,6 @@ class App extends Component {
         return (
             <div className="App">
                 <Hangman />
-                <button id='reset' onClick={() => window.location.reload(false)}>Reset</button>
             </div>
         );
     }
