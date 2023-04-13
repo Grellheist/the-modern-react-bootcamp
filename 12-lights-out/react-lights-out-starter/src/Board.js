@@ -51,6 +51,9 @@ class Board extends Component {
     }
 
     render() {
+        if (this.state.hasWon) {
+            return <h1>You Won!</h1>;
+        }
         return (
             <table className="Board">
                 <tbody>
