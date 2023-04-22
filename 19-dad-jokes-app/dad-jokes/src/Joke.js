@@ -1,35 +1,57 @@
 import React, { Component } from "react";
-import axios from "axios";
-
-const JOKE_URL = "https://icanhazdadjoke.com/"
-const CONFIG = {
-    headers: {
-        "Accept": "application/json"
-    }
-}
+import "./Joke.css";
 
 class Joke extends Component {
-    static defaultProps = {
-        numJokesToGet: 10
+  getColor() {
+    if (this.props.votes >= 15) {
+      return "#4CAF50";
+    } else if (this.props.votes >= 12) {
+      return "#8BC34A";
+    } else if (this.props.votes >= 9) {
+      return "#CDDC39";
+    } else if (this.props.votes >= 6) {
+      return "#FFEB3B";
+    } else if (this.props.votes >= 3) {
+      return "#FFC107";
+    } else if (this.props.votes >= 0) {
+      return "#FF9800";
+    } else {
+      return "#f44336";
     }
-    constructor(props) {
-        super(props);
-        this.state = { jokes: [] };
+  }
+  getEmoji() {
+    if (this.props.votes >= 15) {
+      return "em em-rolling_on_the_floor_laughing";
+    } else if (this.props.votes >= 12) {
+      return "em em-laughing";
+    } else if (this.props.votes >= 9) {
+      return "em em-smiley";
+    } else if (this.props.votes >= 6) {
+      return "em em-slightly_smiling_face";
+    } else if (this.props.votes >= 3) {
+      return "em em-neutral_face";
+    } else if (this.props.votes >= 0) {
+      return "em em-confused";
+    } else {
+      return "em em-angry";
     }
-    async componentDidMount() {
-        let jokes = [];
-        while (jokes.length < this.props.numJokesToGet) {
-            let response = await axios.get(JOKE_URL, CONFIG);
-            jokes.push(response.data.joke);
-        }
-        this.setState({ jokes: jokes })
-    }
-    render() {
-        return (
-            <div>{this.state.jokes}</div>
-        )
-    }
-
+  }
+  render() {
+    return (
+      <div className='Joke'>
+        <div className='Joke-buttons'>
+          <i className='fas fa-arrow-up' onClick={this.props.upvote} />
+          <span className='Joke-votes' style={{ borderColor: this.getColor() }}>
+            {this.props.votes}
+          </span>
+          <i className='fas fa-arrow-down' onClick={this.props.downvote} />
+        </div>
+        <div className='Joke-text'>{this.props.text}</div>
+        <div className='Joke-smiley'>
+          <i className={this.getEmoji()} />
+        </div>
+      </div>
+    );
+  }
 }
-
 export default Joke;

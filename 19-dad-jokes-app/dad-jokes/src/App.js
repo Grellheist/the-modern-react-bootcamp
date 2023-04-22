@@ -1,12 +1,15 @@
-import './App.css';
-import Joke from "./Joke";
+import React, { Component } from "react";
+import JokeList from "./JokeList";
+import "./App.css";
 
-function App() {
+class App extends Component {
+  render() {
     return (
-        <div className="App">
-            <Joke />
-        </div>
+      <div className='App'>
+        <JokeList />
+      </div>
     );
+  }
 }
 
 export default App;
